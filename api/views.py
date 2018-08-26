@@ -13,3 +13,8 @@ class FoodViews(viewsets.ViewSet):
         foods = Food.objects.all()
         serializer = FoodSerializer(foods, many=True)
         return Response(serializer.data)
+
+    def retrieve(self, request, food_id=None):
+        food = Food.objects.get(id=food_id)
+        serializer = FoodSerializer(food)
+        return Response(serializer.data)
