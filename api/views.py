@@ -35,3 +35,8 @@ class FoodViews(viewsets.ViewSet):
         food.save()
         serializer = FoodSerializer(food)
         return Response(serializer.data)
+
+    def destroy(self, request, food_id=None):
+        food = Food.objects.get(id=food_id)
+        food.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)

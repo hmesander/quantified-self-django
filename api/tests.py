@@ -48,3 +48,16 @@ class FoodViewsTest(TestCase):
         self.assertEqual(result["id"], 3)
         self.assertEqual(result["name"], 'lucky charms')
         self.assertEqual(result["calories"], 180)
+
+    def test_deletes_a_food(self):
+        response = self.client.get('/api/v1/foods/')
+        result = response.json()
+        self.assertEqual(len(result), 2)
+        self.assertEqual(result[0]["name"], self.banana.name)
+
+        self.client.delete('/api/v1/foods/1')
+
+        response = self.client.get('/api/v1/foods/')
+        result = response.json()
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["name"], self.oatmeal.name)
