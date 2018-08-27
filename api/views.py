@@ -46,3 +46,8 @@ class MealViews(viewsets.ViewSet):
         meals = Meal.objects.all()
         serializer = MealSerializer(meals, many=True)
         return Response(serializer.data)
+
+    def retrieve(self, request, meal_id=None):
+        meal = Meal.objects.get(id=meal_id)
+        serializer = MealSerializer(meal)
+        return Response(serializer.data)
