@@ -40,3 +40,11 @@ class FoodViewsTest(TestCase):
         result = self.client.patch('/api/v1/foods/2', {'food': {'name': 'poptart', 'calories': 200}}, format='json').json()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(result["name"], 'poptart')
+
+    def test_creates_a_food(self):
+        response = self.client.post('/api/v1/foods', {'food': {'name': 'lucky charms', 'calories': 180}}, format='json')
+        result = response.json()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(result["id"], 3)
+        self.assertEqual(result["name"], 'lucky charms')
+        self.assertEqual(result["calories"], 180)
