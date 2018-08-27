@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
-from api.models import Food
-from api.serializers import FoodSerializer
+from api.models import Food, Meal
+from api.serializers import FoodSerializer, MealSerializer
 from rest_framework.response import Response
 from rest_framework import status
 import json
@@ -40,3 +40,9 @@ class FoodViews(viewsets.ViewSet):
         food = Food.objects.get(id=food_id)
         food.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+class MealViews(viewsets.ViewSet):
+    def list(self, request):
+        meals = Meal.objects.all()
+        serializer = MealSerializer(meals, many=True)
+        return Response(serializer.data)

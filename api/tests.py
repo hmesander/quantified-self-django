@@ -1,5 +1,5 @@
 import json
-from api.models import Food
+from api.models import Food, Meal
 from rest_framework.test import APIClient
 from rest_framework import status
 from django.test import TestCase
@@ -61,3 +61,21 @@ class FoodViewsTest(TestCase):
         result = response.json()
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0]["name"], self.oatmeal.name)
+
+class MealViewsTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.breakfast = Meal.objects.create(name="Breakfast")
+        self.snack = Meal.objects.create(name="Snack")
+        self.lunch = Meal.objects.create(name="Lunch")
+        self.dinner = Meal.objects.create(name="Dinner")
+
+    def test_gets_all_meals(self):
+        response = self.client.get('/api/v1/meals/')
+        result = response.json()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(result), 4)
+        self.assertEqual(result[0]["name"], self.breakfast.name)
+        self.assertEqual(result[1]["name"], self.snack.name)
+        self.assertEqual(result[2]["name"], self.lunch.name)
+        self.assertEqual(result[3]["name"], self.dinner.name)
