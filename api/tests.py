@@ -79,3 +79,9 @@ class MealViewsTest(TestCase):
         self.assertEqual(result[1]["name"], self.snack.name)
         self.assertEqual(result[2]["name"], self.lunch.name)
         self.assertEqual(result[3]["name"], self.dinner.name)
+
+    def test_gets_a_single_meal(self):
+        response = self.client.get('/api/v1/meals/1')
+        result = response.json()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(result["name"], self.breakfast.name)
