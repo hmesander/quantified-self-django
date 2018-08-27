@@ -110,3 +110,27 @@ class MealFoodViewsTest(TestCase):
         response = self.client.get('/api/v1/meals/1')
         result = response.json()
         self.assertEqual(result["foods"][0]["name"], self.banana.name)
+
+    def test_associates_food_with_a_meal(self):
+        response = self.client.get('/api/v1/meals/1')
+        result = response.json()
+        self.assertEqual(result["name"], self.breakfast.name)
+        self.assertEqual(result["foods"], [])
+
+        response = self.client.post('/api/v1/meals/1/foods/1')
+        result = response.json()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(result["message"], f"Successfully added {self.banana.name} to {self.breakfast.name}")
+
+        response = self.client.get('/api/v1/meals/1')
+        result = response.json()
+        self.assertEqual(result["foods"][0]["name"], self.banana.name)
+
+        response = self.client.delete('/api/v1/meals/1/foods/1')
+        result = response.json()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(result["message"], f"Successfully removed {self.banana.name} from {self.breakfast.name}")
+
+        response = self.client.get('/api/v1/meals/1')
+        result = response.json()
+        self.assertEqual(result["foods"], [])
