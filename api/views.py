@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from api.models import Food
 from api.serializers import FoodSerializer
 from rest_framework.response import Response
+from rest_framework import status
 import json
 
 def index(request):
@@ -19,6 +20,12 @@ class FoodViews(viewsets.ViewSet):
         food = Food.objects.get(id=food_id)
         serializer = FoodSerializer(food)
         return Response(serializer.data)
+
+    def create(self, request):
+        food_info = json.loads(request.body)['food']
+        food = Food.objects.create(name=food_info['name'], calories=food_info['calories'])
+        serializer = FoodSerializer(food)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, food_id=None):
         food = Food.objects.get(id=food_id)
