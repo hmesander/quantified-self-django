@@ -1,8 +1,9 @@
 from django.urls import include, path
-from .views import FoodViews
+from .views import FoodViews, MealViews
 
 
 urlpatterns = [
     path('foods/', FoodViews.as_view({'get': 'list', 'post': 'create'})),
-    path('foods/<food_id>', FoodViews.as_view({'get': 'retrieve', 'patch': 'update', 'delete': 'destroy'}))
+    path('foods/<food_id>', FoodViews.as_view({'get': 'retrieve', 'patch': 'update', 'delete': 'destroy'})),
+    path('meals/', MealViews.as_view({'get': 'list'}))
 ]
