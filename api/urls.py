@@ -7,5 +7,5 @@ urlpatterns = [
     path('foods/<food_id>', FoodViews.as_view({'get': 'retrieve', 'patch': 'update', 'delete': 'destroy'})),
     path('meals/', MealViews.as_view({'get': 'list'})),
     path('meals/<meal_id>', MealViews.as_view({'get': 'retrieve'})),
-    path('meals/<meal_id>/foods/<id>', MealFoodViews.as_view({'post': 'create'}))
+    path('meals/<meal_id>/foods/<id>', MealFoodViews.as_view({'post': 'create', 'delete': 'destroy'}))
 ]
