@@ -109,4 +109,4 @@ class MealFoodViewsTest(TestCase):
 
         response = self.client.get('/api/v1/meals/1')
         result = response.json()
-        self.assertEqual(result["foods"][0]["name"], self.breakfast.name)
+        self.assertEqual(result["foods"][0]["name"], self.banana.name)
