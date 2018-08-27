@@ -5,5 +5,6 @@ from .views import FoodViews, MealViews
 urlpatterns = [
     path('foods/', FoodViews.as_view({'get': 'list', 'post': 'create'})),
     path('foods/<food_id>', FoodViews.as_view({'get': 'retrieve', 'patch': 'update', 'delete': 'destroy'})),
-    path('meals/', MealViews.as_view({'get': 'list'}))
+    path('meals/', MealViews.as_view({'get': 'list'})),
+    path('meals/<meal_id>', MealViews.as_view({'get': 'retrieve'}))
 ]
