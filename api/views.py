@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from api.models import Food
 from api.serializers import FoodSerializer
 from rest_framework.response import Response
+import json
 
 def index(request):
     return HttpResponse("Welcome to Quantified Self - Django!")
@@ -16,5 +17,14 @@ class FoodViews(viewsets.ViewSet):
 
     def retrieve(self, request, food_id=None):
         food = Food.objects.get(id=food_id)
+        serializer = FoodSerializer(food)
+        return Response(serializer.data)
+
+    def update(self, request, food_id=None):
+        food = Food.objects.get(id=food_id)
+        food_info = json.loads(request.body)['food']
+        food.name = food_info['name']
+        food.calories=food_info['calories']
+        food.save()
         serializer = FoodSerializer(food)
         return Response(serializer.data)
