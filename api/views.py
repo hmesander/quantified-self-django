@@ -59,3 +59,10 @@ class MealFoodViews(viewsets.ViewSet):
         meal.foods.add(food)
         message = { 'message': f'Successfully added {food.name} to {meal.name}' }
         return Response(message, status=status.HTTP_201_CREATED)
+
+    def destroy(self, request, meal_id=None, id=None):
+        food = Food.objects.get(id=id)
+        meal = Meal.objects.get(id=meal_id)
+        meal.foods.remove(food)
+        message = { 'message': f'Successfully removed {food.name} from {meal.name}' }
+        return Response(message, status=status.HTTP_200_OK)
