@@ -42,7 +42,7 @@ class FoodViewsTest(TestCase):
         self.assertEqual(result["name"], 'poptart')
 
     def test_creates_a_food(self):
-        response = self.client.post('/api/v1/foods', {'food': {'name': 'lucky charms', 'calories': 180}}, format='json')
+        response = self.client.post('/api/v1/foods/', {'food': {'name': 'lucky charms', 'calories': 180}}, format='json')
         result = response.json()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(result["id"], 3)
