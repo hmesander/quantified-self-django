@@ -85,3 +85,28 @@ class MealViewsTest(TestCase):
         result = response.json()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(result["name"], self.breakfast.name)
+
+class MealFoodViewsTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.breakfast = Meal.objects.create(name="Breakfast")
+        self.snack = Meal.objects.create(name="Snack")
+        self.lunch = Meal.objects.create(name="Lunch")
+        self.dinner = Meal.objects.create(name="Dinner")
+        self.banana = Food.objects.create(name="banana", calories=80)
+        self.oatmeal = Food.objects.create(name="oatmeal", calories=200)
+
+    def test_associates_food_with_a_meal(self):
+        response = self.client.get('/api/v1/meals/1')
+        result = response.json()
+        self.assertEqual(result["name"], self.breakfast.name)
+        self.assertEqual(result["foods"], [])
+
+        response = self.client.post('/api/v1/meals/1/foods/1')
+        result = response.json()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(result["message"], f"Successfully added {self.banana.name} to {self.breakfast.name}")
+
+        response = self.client.get('/api/v1/meals/1')
+        result = response.json()
+        self.assertEqual(result["foods"][0]["name"], self.banana.name)

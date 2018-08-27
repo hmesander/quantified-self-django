@@ -51,3 +51,11 @@ class MealViews(viewsets.ViewSet):
         meal = Meal.objects.get(id=meal_id)
         serializer = MealSerializer(meal)
         return Response(serializer.data)
+
+class MealFoodViews(viewsets.ViewSet):
+    def create(self, request, meal_id=None, id=None):
+        food = Food.objects.get(id=id)
+        meal = Meal.objects.get(id=meal_id)
+        meal.foods.add(food)
+        message = { 'message': f'Successfully added {food.name} to {meal.name}' }
+        return Response(message, status=status.HTTP_201_CREATED)
