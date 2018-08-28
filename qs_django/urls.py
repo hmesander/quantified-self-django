@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import include
+from api.views import index
+
 
 urlpatterns = [
-    path('/', WelcomeView.as_view({'get': 'welcome' })),
+    path('', index),
     path('admin/', admin.site.urls),
     path('api/v1/', include('api.urls'))
 ]

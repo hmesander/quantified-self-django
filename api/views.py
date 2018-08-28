@@ -8,7 +8,7 @@ from rest_framework import status
 import json
 
 def index(request):
-    return HttpResponse("Welcome to Quantified Self - Django!")
+    return render(request, 'index.html')
 
 class FoodViews(viewsets.ViewSet):
     def list(self, request):

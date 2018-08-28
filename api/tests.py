@@ -8,7 +8,7 @@ class WelcomeViewTest(TestCase):
     def test_displays_welcome_page(self):
         response = self.client.get('/')
         self.assertContains(response, '<h1>')
-        self.assertContains(response, 'Welcome to the Quantified Self API - Django')
+        self.assertContains(response, 'Welcome to Quantified Self - Django!')
 
 class FoodViewsTest(TestCase):
     def setUp(self):
