@@ -4,6 +4,12 @@ from rest_framework.test import APIClient
 from rest_framework import status
 from django.test import TestCase
 
+class WelcomeViewTest(TestCase):
+    def test_displays_welcome_page(self):
+        response = self.client.get('/')
+        self.assertContains(response, '<h1>')
+        self.assertContains(response, 'Welcome to Quantified Self - Django!')
+
 class FoodViewsTest(TestCase):
     def setUp(self):
         self.client = APIClient()
