@@ -18,6 +18,7 @@ from django.urls import include, path
 from django.conf.urls import include
 
 urlpatterns = [
+    path('/', WelcomeView.as_view({'get': 'welcome' })),
     path('admin/', admin.site.urls),
     path('api/v1/', include('api.urls'))
 ]
