@@ -1,1 +1,1 @@
-web: gunicorn qs_django.wsgi
+web: --preload gunicorn qs_django.wsgi
