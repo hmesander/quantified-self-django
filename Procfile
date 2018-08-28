@@ -1,1 +1,1 @@
-web: --preload gunicorn qs_django.wsgi
+web: gunicorn qs_django.wsgi:application --log-file=- 
