@@ -96,16 +96,13 @@ WSGI_APPLICATION = 'qs_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'qs_django',
-        'USER': 'name',
-        'PASSWORD': '',
+        'NAME': 'food_tracker_django2',
+        'USER': 'sample_user',
+        'PASSWORD': 'sample_password',
         'HOST': 'localhost',
         'PORT': '',
     }
 }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 
 # Password validation
