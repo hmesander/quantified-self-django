@@ -23,7 +23,7 @@ class FoodViews(viewsets.ViewSet):
 
     def create(self, request):
         food_info = json.loads(request.body)['food']
-        food = Food.objects.create(name=food_info['name'], calories=food_info['calories'])
+        food = Food.objects.create(id=food_info['id'], name=food_info['name'], calories=food_info['calories'])
         serializer = FoodSerializer(food)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 

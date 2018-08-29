@@ -9,10 +9,10 @@ You'll need Python3 and Django 2.0.7 installed.
   ```shell
   git clone git@github.com:hmesander/quantified-self-django.git
   ```
-2. Change into the `qs_django` directory
+2. Change into the `quantified-self-django` directory
 
   ```shell
-  cd qs_django
+  cd quantified-self-django
   ```
 3. Create a virtual environment and activate it
 
@@ -20,18 +20,19 @@ You'll need Python3 and Django 2.0.7 installed.
   virtualenv -p python3 .venv
   source .venv/bin/activate
   ```
-4. Upgrade pip and install dependencies
+4. Upgrade pip
 
   ```shell
   pip3 install --upgrade pip
-  pip3 install -r requirements/local.txt
   ```
 
 3. Set up the database in psql
 
   ```shell
+  psql
   CREATE DATABASE food_tracker_django2;
   CREATE DATABASE food_tracker_django2_test;
+  \q
   ```
 
 4. Migrate and Seed
