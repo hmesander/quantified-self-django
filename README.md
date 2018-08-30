@@ -20,10 +20,16 @@ You'll need Python3 and Django 2.0.7 installed.
   virtualenv -p python3 .venv
   source .venv/bin/activate
   ```
-4. Upgrade pip
+4. Setup the virtual environment
 
   ```shell
   pip3 install --upgrade pip
+  pip3 install Django
+  brew install python3
+  pip3 install djangorestframework
+  pip3 install django-cors-headers
+  pip3 install dj_database_url
+  pip3 install psycopg2
   ```
 
 3. Set up the database in psql
@@ -31,7 +37,6 @@ You'll need Python3 and Django 2.0.7 installed.
   ```shell
   psql
   CREATE DATABASE food_tracker_django2;
-  CREATE DATABASE food_tracker_django2_test;
   \q
   ```
 
@@ -63,7 +68,7 @@ You'll need Python3 and Django 2.0.7 installed.
 
 Front End deployed with Surge: http://quantified-self-django.surge.sh/
 
-Backend deployed with Heroku: https://fierce-fjord-58365.herokuapp.com/
+Backend deployed with Heroku: https://qs-django-be.herokuapp.com/
 
 <hr>
 
